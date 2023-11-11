@@ -25,7 +25,7 @@ if (empty($_SESSION['id_user'])) {
 
 
         <!-- App favicon -->
-        <link rel="icon" type="images/png" href="img/logo komersial sip transparant.png">
+        <link rel="icon" type="images/png" href="img/LogoPerson.png">
 
         <!-- Plugin css -->
         <link href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
@@ -51,9 +51,9 @@ if (empty($_SESSION['id_user'])) {
                         <!-- Topbar Brand Logo -->
                         <div class="logo-topbar">
                             <!-- Logo light -->
-                            <a href="index.html" class="logo-light">
+                            <a href="." class="logo-light">
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo.png" alt="logo">
+                                    <img src="img/logo komersial sip transparant.png" alt="logo">
                                 </span>
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm.png" alt="small logo">
@@ -61,9 +61,9 @@ if (empty($_SESSION['id_user'])) {
                             </a>
 
                             <!-- Logo Dark -->
-                            <a href="index.html" class="logo-dark">
+                            <a href="." class="logo-dark">
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="dark logo">
+                                    <img src="img/logo komersial sip transparant.png" alt="dark logo">
                                 </span>
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-dark-sm.png" alt="small logo">
@@ -73,7 +73,7 @@ if (empty($_SESSION['id_user'])) {
 
                         <!-- Sidebar Menu Toggle Button -->
                         <button class="button-toggle-menu">
-                            <i class="mdi mdi-menu"></i>
+                            <i class="ri-apps-2-line"></i>
                         </button>
 
                         <!-- Horizontal Menu Toggle Button -->
@@ -154,22 +154,22 @@ if (empty($_SESSION['id_user'])) {
             <div class="leftside-menu">
 
                 <!-- Brand Logo Light -->
-                <a href="index.html" class="logo logo-light">
+                <a href="." class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="assets/images/logo.png" alt="logo">
+                        <img src="img/LogoUMKM.png" alt="logo">
                     </span>
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="small logo">
+                        <img src="img/LogoPerson.png" alt="small logo">
                     </span>
                 </a>
 
                 <!-- Brand Logo Dark -->
-                <a href="index.html" class="logo logo-dark">
+                <a href="." class="logo logo-dark">
                     <span class="logo-lg">
-                        <img src="assets/images/logo-dark.png" alt="dark logo">
+                        <img src="img/LogoUMKM.png" alt="dark logo">
                     </span>
                     <span class="logo-sm">
-                        <img src="assets/images/logo-dark-sm.png" alt="small logo">
+                        <img src="img/LogoPerson.png" alt="small logo">
                     </span>
                 </a>
 
@@ -204,9 +204,15 @@ if (empty($_SESSION['id_user'])) {
                         <li class="side-nav-item" aria-expanded="false">
                             <a href=".?hal=datauser" class="side-nav-link">
                                 <i class=" ri-user-3-fill"></i>
-                                <span> Data User </span>
+                                <span> Data Akun </span>
                             </a>
-                        </li>
+                            <!-- </li>
+                        <li class="side-nav-item" aria-expanded="false">
+                            <a href=".?hal=datauser" class="side-nav-link">
+                                <i class=" ri-user-3-fill"></i>
+                                <span> Data Pelanggan </span>
+                            </a>
+                        </li> -->
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="true" aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class=" ri-cake-3-fill"></i>
@@ -225,11 +231,40 @@ if (empty($_SESSION['id_user'])) {
                             </div>
                         </li>
                         <li class="side-nav-item" aria-expanded="false">
-                            <a href=".?hal=datauser" class="side-nav-link">
+                            <a href=".?hal=permintaan" class="side-nav-link">
+                                <i class="ri-shopping-cart-fill"></i>
+                                <span> Permintaan </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarPesanan" aria-expanded="true" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class=" ri-shopping-bag-fill"></i>
+                                <span> Daftar Pesanan </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarPesanan">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href=".?hal=pesanan-approve">Pesanan Approve</a>
+                                    </li>
+                                    <li>
+                                        <a href=".?hal=pesanan-proccess">Pesanan Proccess</a>
+                                    </li>
+                                    <li>
+                                        <a href=".?hal=pesanan-delivery">Pesanan Delivery</a>
+                                    </li>
+                                    <li>
+                                        <a href=".?hal=pesanan-complete">Pesanan Complete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- <li class="side-nav-item" aria-expanded="false">
+                            <a href=".?hal=pesanan" class="side-nav-link">
                                 <i class="ri-shopping-cart-fill"></i>
                                 <span> Pesanan </span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                     <!--- End Sidemenu -->
                     <div class="clearfix"></div>
@@ -286,6 +321,28 @@ if (empty($_SESSION['id_user'])) {
 
         </div>
         <!-- END wrapper -->
+
+        <!-- make menu item acrive -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Mengambil semua elemen side-nav-item
+                var sideNavItems = document.querySelectorAll(".side-nav-item");
+
+                // Menambahkan event listener untuk setiap elemen side-nav-item
+                sideNavItems.forEach(function(item) {
+                    item.addEventListener("click", function() {
+                        // Menghapus kelas menuitem-active dari semua elemen
+                        sideNavItems.forEach(function(item) {
+                            item.classList.remove("menuitem-active");
+                        });
+
+                        // Menambahkan kelas menuitem-active ke elemen yang diklik
+                        this.classList.add("menuitem-active");
+                    });
+                });
+            });
+        </script>
+        <!-- end make menu item active -->
 
         <!-- Vendor js -->
         <script src="assets/js/vendor.min.js"></script>

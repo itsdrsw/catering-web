@@ -105,7 +105,7 @@ $id = generateRandomID();
                                                 ('$id', '$nama', '$harga', '$kategori', '$gambar', '$jumlah', '$satuan') ");
                                     copy($tmp, "img/$gambar");
                                     }
-                                    echo "<script>alert('Data berhasil disimpan');location='.?hal=kuehaja'</script>";
+                                    echo "<script>alert('Data berhasil disimpan');location='.?hal=kuehajatan'</script>";
                                 }
                                 ?>
                             </form>

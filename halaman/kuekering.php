@@ -31,11 +31,11 @@
                             <tbody>
                                 <?php
                                 $no = 1;
-                                $query = "SELECT * FROM kue where kategori = 'kering'";
+                               $query = "SELECT * FROM kue where kategori = 'kering'";
                                 $result = mysqli_query($conn, $query);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $modalId = "modal-" . $row['id_kue'];
-                                ?>
+                                ?> 
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama_kue'] ?></td>
@@ -56,7 +56,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-success">
-                                                            <h4 class="modal-title" id="<?= $modalId ?> label">Foto Kue <?= $row['nama_kue'] ?></h4>
+                                                            <h4 class="modal-title" style="color: white;" id="<?= $modalId ?> label">Foto Kue <?= $row['nama_kue'] ?></h4>
                                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                         </div>
                                                         <div class="modal-body">

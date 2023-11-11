@@ -56,7 +56,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-success">
-                                                            <h4 class="modal-title" id="<?= $modalId ?> label">Foto Kue <?= $row['nama_kue'] ?></h4>
+                                                            <h4 class="modal-title" style="color: #fff;" id="<?= $modalId ?> label">Foto Kue <?= $row['nama_kue'] ?></h4>
                                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                         </div>
                                                         <div class="modal-body">
