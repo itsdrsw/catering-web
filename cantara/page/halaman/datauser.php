@@ -36,7 +36,7 @@
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama'] ?></td>
-                                        <td><?= $row['alamat'] ?></td>
+                                        <td> <?= $row['alamat_lengkap'] ?>, <?= $row['kecamatan'] ?></td>
                                         <td><?= $row['telp'] ?></td>   
                                         <td>
                                             <a class="btn btn-info btn-sm" href=".?hal=ubahuser&id=<?= $row['id_user'] ?>">

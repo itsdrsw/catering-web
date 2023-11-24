@@ -1,11 +1,11 @@
 <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                </div>
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
             </div>
         </div>
     </div>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -38,8 +38,8 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama'] ?></td>
                                         <td><?= $row['total_harga'] ?></td>
-                                        <td><?= $row['tgl_terima'] ?></td>   
-                                        <td> 
+                                        <td><?= $row['tgl_terima'] ?></td>
+                                        <td>
                                             <?php if ($row['ket'] == 'request') : ?>
                                                 <button class="btn btn-soft-info rounded-pill"><?= $row['ket'] ?></button>
                                             <?php elseif ($row['ket'] == 'rejected') : ?>
@@ -52,6 +52,9 @@
 
                                             <a class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus ?')" href=".?hal=hapususer&id=<?= $row['id_user'] ?>">
                                                 <i class="ri-delete-bin-2-fill"></i> Hapus</a>
+
+                                            <a class="btn btn-success btn-sm" href=".?hal=detailpesanan&id=<?= $row['id_pesanan'] ?>">
+                                                <i class=" ri-edit-2-fill"></i> Selengkapnya</a>
                                         </td>
                                     </tr>
                                 <?php   } ?>

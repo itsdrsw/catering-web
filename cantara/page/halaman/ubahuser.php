@@ -35,9 +35,20 @@ $row      = mysqli_fetch_assoc($result);
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputPassword3" class="col-3 col-form-label">Alamat</label>
+                                    <label for="inputPassword5" class="col-3 col-form-label">Kecamatan</label>
                                     <div class="col-9">
-                                        <input type="text" name="txtalamat" class="form-control" id="inputPassword3" value="<?= $row['alamat'] ?>" placeholder="Masukkan email Anda">
+                                        <select class="form-control" data-toggle="select" name="txtkecamatan">
+                                            <option value="<?= $row['kecamatan'] ?>" selected>Pilih Kecamatan</option>
+                                            <option value="Besuk">Besuk</option>
+                                            <option value="Kraksaan">Kraksaan</option>
+                                            <option value="Krejengan">Krejengan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-3 col-form-label">Alamat Lengkap</label>
+                                    <div class="col-9">
+                                        <input type="text" name="txtalamat" class="form-control" id="inputPassword3" value="<?= $row['alamat_lengkap'] ?>" placeholder="Masukkan email Anda">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -64,15 +75,17 @@ $row      = mysqli_fetch_assoc($result);
                                 </div>
                                 <?php
                                 if (@$_POST['simpan']) {
-                                    $nama  = $_POST['txtnama'];
-                                    $pass    = $_POST['txtpass'];
-                                    $telp = $_POST['txttelp'];
+                                    $nama   = $_POST['txtnama'];
+                                    $pass   = $_POST['txtpass'];
+                                    $telp   = $_POST['txttelp'];
+                                    $kec    = $_POST['txtkecamatan'];
                                     $alamat = $_POST['txtalamat'];
-                                    $id = $_GET['id'];
+                                    $id     = $_GET['id'];
                                     if (!empty($pass)) {
-                                        mysqli_query($conn, "UPDATE user SET nama = '$nama', alamat = '$alamat', telp = '$telp', password = '$pass' WHERE id_user = '$id'") or die(mysqli_error($conn));
+                                        mysqli_query($conn, "UPDATE user SET nama = '$nama', alamat_lengkap = '$alamat', kecamatan = '$kec', telp = '$telp', password = '$pass' WHERE id_user = '$id'") or die(mysqli_error($conn));
                                     }
-                                    $_SESSION['alamat'] = $alamat;
+                                    $_SESSION['kecamatan'] = $kec;
+                                    $_SESSION['nama'] = $nama;
                                     echo "<script>alert('Data berhasil disimpan');location='.?hal=datauser'</script>";
                                 }
                                 ?>

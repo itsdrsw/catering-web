@@ -10,7 +10,7 @@ if (empty($_SESSION['id_user'])) {
 
     <head>
         <meta charset="utf-8" />
-        <title>Home</title>
+        <title>Cantara-Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -47,7 +47,6 @@ if (empty($_SESSION['id_user'])) {
             <div class="navbar-custom">
                 <div class="topbar container-fluid">
                     <div class="d-flex align-items-center gap-lg-2 gap-1">
-
                         <!-- Topbar Brand Logo -->
                         <div class="logo-topbar">
                             <!-- Logo light -->
@@ -86,7 +85,7 @@ if (empty($_SESSION['id_user'])) {
                         </button>
 
                         <!-- Topbar Search Form -->
-                        <div class="app-search dropdown d-none d-lg-block">
+                        <!-- <div class="app-search dropdown d-none d-lg-block">
                             <form>
                                 <div class="input-group">
                                     <input type="search" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
@@ -94,7 +93,7 @@ if (empty($_SESSION['id_user'])) {
                                     <button class="input-group-text btn btn-success" type="submit">Search</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
 
                     <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -129,7 +128,7 @@ if (empty($_SESSION['id_user'])) {
                                 </span>
                                 <span class="d-lg-flex flex-column gap-1 d-none">
                                     <h5 class="my-0"><?= $_SESSION['nama'] ?></h5>
-                                    <h6 class="my-0 fw-normal"><?= $_SESSION['alamat'] ?></h6>
+                                    <h6 class="my-0 fw-normal"><?= $_SESSION['kecamatan'] ?></h6>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
@@ -149,14 +148,13 @@ if (empty($_SESSION['id_user'])) {
                 </div>
             </div>
             <!-- ========== Topbar End ========== -->
-
             <!-- ========== Left Sidebar Start ========== -->
             <div class="leftside-menu">
 
                 <!-- Brand Logo Light -->
                 <a href="." class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="img/LogoUMKM.png" alt="logo">
+                        <img src="assets/images/chef_light.png" alt="logo">
                     </span>
                     <span class="logo-sm">
                         <img src="img/LogoPerson.png" alt="small logo">
@@ -166,7 +164,7 @@ if (empty($_SESSION['id_user'])) {
                 <!-- Brand Logo Dark -->
                 <a href="." class="logo logo-dark">
                     <span class="logo-lg">
-                        <img src="img/LogoUMKM.png" alt="dark logo">
+                        <img src="assets/images/chef_light.png" alt="dark logo">
                     </span>
                     <span class="logo-sm">
                         <img src="img/LogoPerson.png" alt="small logo">

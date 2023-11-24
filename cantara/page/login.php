@@ -16,7 +16,8 @@ if (empty($_SESSION['user'])) {
             $row = mysqli_fetch_assoc($result);
             $_SESSION['id_user'] = $row['id_user'];
             $_SESSION['nama'] = $row['nama'];
-            $_SESSION['alamat'] = $row['alamat'];
+            $_SESSION['alamat_lengkap'] = $row['alamat_lengkap'];
+            $_SESSION['kecamatan'] = $row['kecamatan'];
             $_SESSION['telp'] = $row['telp'];
             $_SESSION['security'] = $row['security'];
             $_SESSION['status'] = $row['status'];
@@ -39,7 +40,7 @@ if (empty($_SESSION['user'])) {
         <meta content="Coderthemes" name="author" />
 
         <!-- App favicon -->
-        <link rel="icon" type="images/png" href="img/logo komersial sip transparant.png">
+        <link rel="icon" type="images/png" href="img/LogoPerson.png">
 
         <!-- Theme Config Js -->
         <script src="assets/js/hyper-config.js"></script>
@@ -85,17 +86,18 @@ if (empty($_SESSION['user'])) {
                                 <form action="login.php" method="POST">
                                     <div class="mb-3">
                                         <label for="emailaddress" class="form-label">Username </label>
-                                        <input class="form-control" name="txt_username" type="text" id="emailaddress" required="" placeholder="Masukkan username Anda">
+                                        <input class="form-control" name="txt_username" type="text" id="emailaddress" required placeholder="Masukkan username Anda">
                                     </div>
                                     <div class="mb-3">
-                                        <a href="#" class="text-muted float-end"><small>Lupa password?</small></a>
+                                        <!-- <a href="#" class="text-muted float-end"><small>Lupa password?</small></a> -->
                                         <label for="password" class="form-label">Password</label>
-                                        <div class="input-group input-group-merge">
+                                        <input type="password" class="form-control" name="txt_pass" placeholder="Masukkan password Anda" required>
+                                        <!-- <div class="input-group input-group-merge">
                                             <input type="password" name="txt_pass" id="password" class="form-control" placeholder="Masukkan password Anda">
                                             <div class="input-group-text" data-password="false">
                                                 <span class="password-eye"></span>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="mb-3 mb-0 text-center d-grid">
                                         <button class="btn btn-lg btn-success" type="submit" name="submit"> Masuk </button>

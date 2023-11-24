@@ -37,7 +37,7 @@ $row      = mysqli_fetch_assoc($result);
                                 <div class="row mb-3">
                                     <label for="inputEmail3" class="col-3 col-form-label">Alamat</label>
                                     <div class="col-9">
-                                        <input type="text" name="txtalamat" class="form-control" id="inputEmail3" value="<?= $row['alamat'] ?>" readonly>
+                                        <input type="text" name="txtalamat" class="form-control" id="inputEmail3" value="<?= $row['alamat_lengkap'] ?>, <?= $row['kecamatan'] ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -81,7 +81,6 @@ $row      = mysqli_fetch_assoc($result);
                                     $id          = $_GET['id'];
                                    
                                         mysqli_query($conn, "UPDATE pesanan SET ket = '$status' WHERE id_pesanan = '$id'");
-                                    
                                     echo "<script>alert('Data berhasil disimpan');location='.?hal=pesanan'</script>";
                                 }
                                 ?>
