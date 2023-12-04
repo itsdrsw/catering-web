@@ -20,7 +20,7 @@ $row      = mysqli_fetch_assoc($result);
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Ubah Data Kue Kering</h4>
+                    <h4 class="header-title">Ubah Data Kue Hajatan</h4>
                     <p class="text-muted font-14"></p>
 
                     <ul class="nav nav-tabs nav-bordered mb-3">
@@ -43,8 +43,18 @@ $row      = mysqli_fetch_assoc($result);
                                 <div class="row mb-3">
                                     <label for="inputPassword3" class="col-3 col-form-label">Gambar</label>
                                     <div class="col-9">
-                                        <input type="file" name="txtgbr" class="form-control" id="inputPassword3" value="<?= $row['gambar'] ?>" >
-                                        <img src="img/<?= $row['gambar'] ?>" width="50" height="50">
+                                        <input type="file" name="txtgbr" class="form-control" id="inputPassword3" >
+                                        <?php
+                                            $gambarData = $row['gambar']; // Ambil data gambar dari database
+
+                                            if (!empty($gambarData)) {
+                                                $gambarBase64 = base64_encode($gambarData); // Konversi blob ke base64
+
+                                                echo '<img src="data:image/jpeg;base64,' . $gambarBase64 . '" style="margin-top: 10px;" width="100" height="60">';
+                                            } else {
+                                                echo 'Tidak ada gambar';
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -79,23 +89,29 @@ $row      = mysqli_fetch_assoc($result);
                                     </div>
                                 </div>
                                 <?php
-                                if (@$_POST['simpan']) {
-                                    $nama        = $_POST['txtnama'];
-                                    $harga       = $_POST['txtharga'];
-                                    $kategori    = $_POST['txtkategori'];
-                                    $gambar      = $_FILES['txtgbr']['name'];
-                                    $tmp         = $_FILES['txtgbr']['tmp_name'];
-                                    $jumlah      = $_POST['txtjumlah'];
-                                    $satuan      = $_POST['txtsatuan'];
-                                    $id          = $_GET['id'];
-                                   
-                                    if (empty($gambar)) {
-                                        mysqli_query($conn, "UPDATE kue SET nama_kue = '$nama', harga = '$harga', jumlah = '$jumlah', harga = '$harga' WHERE id_kue = '$id'");
+                                if (isset($_POST['simpan'])) {
+                                    $nama     = $_POST['txtnama'];
+                                    $harga    = $_POST['txtharga'];
+                                    $kategori = $_POST['txtkategori'];
+                                    $jumlah   = $_POST['txtjumlah'];
+                                    $satuan   = $_POST['txtsatuan'];
+                                    $id       = $_GET['id'];
+
+                                    // Periksa apakah ada file gambar yang diunggah
+                                    if (!empty($_FILES['txtgbr']['name'])) {
+                                        $gambar = addslashes(file_get_contents($_FILES['txtgbr']['tmp_name']));
+                                        $updateQuery = "UPDATE kue SET nama_kue = '$nama', harga = '$harga', kategori = '$kategori', jumlah = '$jumlah', satuan = '$satuan', gambar = '$gambar' WHERE id_kue = '$id'";
                                     } else {
-                                        mysqli_query($conn, "UPDATE kue SET nama_kue = '$nama', harga = '$harga', gambar = '$gambar', jumlah = '$jumlah', harga = '$harga' WHERE id_kue = '$id'");
-                                        copy($tmp, "img/$gambar");
+                                        $updateQuery = "UPDATE kue SET nama_kue = '$nama', harga = '$harga', kategori = '$kategori', jumlah = '$jumlah', satuan = '$satuan' WHERE id_kue = '$id'";
                                     }
-                                    echo "<script>alert('Data berhasil disimpan');location='.?hal=kuehajatan'</script>";
+
+                                    $result = mysqli_query($conn, $updateQuery);
+
+                                    if ($result) {
+                                        echo "<script>alert('Data berhasil disimpan');location='.?hal=kuehajatan'</script>";
+                                    } else {
+                                        echo "<script>alert('Gagal menyimpan data');</script>";
+                                    }
                                 }
                                 ?>
                             </form>

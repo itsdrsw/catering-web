@@ -65,8 +65,8 @@ $row      = mysqli_fetch_assoc($result);
                                     <div class="col-9">
                                         <select class="form-control" data-toggle="select" name="txtstatus">
                                             <option value="<?= $row['ket'] ?>" selected>Pilih status</option>
-                                            <option value="approve">Approve</option>
-                                            <option value="rejected">Rejected</option>
+                                            <option value="Disetujui">Disetujui</option>
+                                            <option value="Ditolak">Ditolak</option>
                                         </select>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ $row      = mysqli_fetch_assoc($result);
                                     $id          = $_GET['id'];
                                    
                                         mysqli_query($conn, "UPDATE pesanan SET ket = '$status' WHERE id_pesanan = '$id'");
-                                    echo "<script>alert('Data berhasil disimpan');location='.?hal=pesanan'</script>";
+                                    echo "<script>alert('Data berhasil disimpan');location='.?hal=pesanan-approve'</script>";
                                 }
                                 ?>
                             </form>

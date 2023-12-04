@@ -305,6 +305,7 @@ img {
 
 .button-link:hover {
   background-color: transparent;
+  color: #FF4A47;
 }
 
 .button-flex {
@@ -533,6 +534,7 @@ img {
   }
   .home__img {
     order: 1;
+    /* height: 100px; */
   }
   .home__container,
   .about__container,
@@ -546,6 +548,9 @@ img {
   .app__data,
   .contact__description {
     text-align: initial;
+  }
+  .about__description{
+    text-align: justify;
   }
   .about__img,
   .app__img {

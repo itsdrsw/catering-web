@@ -1,5 +1,5 @@
 <?php
-include 'page/koneksi.php';
+include 'config/koneksi.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@ include 'page/koneksi.php';
                         <a href="#about" class="nav__link">About us</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#services" class="nav__link">Services</a>
+                        <a href="#services" class="nav__link">Product</a>
                     </li>
                     <li class="nav__item">
                         <a href="#contact" class="nav__link">Contact us</a>
@@ -59,11 +59,13 @@ include 'page/koneksi.php';
         <!--=============== HOME ===============-->
         <section class="home section" id="home">
             <div class="home__container container grid">
-                <img class="svg__img svg__color home__img" src="assets/img/gambarperson.png" alt="">
+                <img class="svg__img svg__color home__img" src="images/LogoNew.png" alt="">
                 <div class="home__data">
-                    <h1 class="home__title judul">Home Catering Nusantara</h1>
-                    <p class="home__description">Selamat datang di dunia kelezatan di mana setiap keinginan rasa Anda
-                        dapat terpenuhi. Kami adalah penyedia catering kue yang siap membawa sentuhan manis dan tak
+                    <h1 class="home__title">Kini, Pesan Kue
+                        <br>Jauh Lebih Mudah
+                    </h1>
+                    <p class="home__description">Selamat datang! Kami adalah penyedia catering kue yang siap membawa
+                        sentuhan manis dan tak
                         terlupakan ke setiap momen spesial Anda.</p>
 
                     <a href="#" class="button">Login</a>
@@ -77,11 +79,13 @@ include 'page/koneksi.php';
             <div class="about__container grid">
                 <div class="about__data">
                     <h2 class="section__title-center">Tentang <br> Aplikasi Kami</h2>
-                    <p class="about__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo unde
-                        voluptate in, rem ratione, natus, quia repudiandae officiis numquam magni tempora neque.
-                        Delectus, maxime! Reprehenderit impedit dignissimos molestiae quae voluptates..</p>
+                    <p class="about__description">Home Catering Nusantara (Cantara) merupakan aplikasi
+                        pemesanan kue berbasis mobile yang dirancang untuk memudahkan Anda menemukan dan
+                        memesan kue-kue lezat dari berbagai varian. Dengan antarmuka yang ramah pengguna,
+                        kami berusaha memberikan layanan yang prima dan memberikan kepuasan tanpa batas bagi
+                        pelanggan setia kami.</p>
                 </div>
-                <img class="svg__img svg__color about__img" src="assets/img/gambarhp.png" alt="">
+                <img class="svg__img svg__color about__img" src="images/gambariphone.png" alt="">
 
             </div>
         </section>
@@ -89,27 +93,42 @@ include 'page/koneksi.php';
         <!--=============== SERVICES ===============-->
         <section class="services section container" id="services">
             <h2 class="section__title">Daftar Kue Terbaru di<br> Cantara</h2>
-            
-            <div class="services__container grid">
-            <?php
-                $sql    = "SELECT * FROM kue LIMIT 3";
-                $q      = mysqli_query($conn,$sql);
-                while($r = mysqli_fetch_assoc($q)){
-            ?>
-                <div class="services__data">
-                    <h3 class="services__subtitle"><?=$r['nama_kue']?></h3>
-                    <img class="svg__color services__img" src="page/img/<?=$r['gambar']?>" alt="" >
 
-                    <p class="services__description">Kue dadar gulung adalah makanan tradisional Indonesia yang populer.
-                        Nama "dadar" berasal dari bahasa Melayu yang artinya "tebal" atau "berlapis-lapis",
-                        sedangkan "gulung" mengacu pada cara kue ini dibuat, yaitu dengan digulung seperti pancake.
-                    <div>
-                        <a href="#" class="button button-link">Learn More</a>
+            <div class="services__container grid">
+                <?php
+                function format_rupiah($angka)
+                {
+                    $rupiah = "Rp" . number_format($angka, 0, ',', '.');
+                    return $rupiah;
+                }
+                ?>
+                <?php
+                $sql    = "SELECT * FROM kue ORDER BY waktu_unggah DESC LIMIT 3";
+                $q      = mysqli_query($conn, $sql);
+                while ($r = mysqli_fetch_assoc($q)) {
+                ?>
+                    <div class="services__data">
+                        <h3 class="services__subtitle"><?= $r['nama_kue'] ?></h3>
+                        <?php
+                        $gambarData = $r['gambar']; // Menggunakan variabel $r untuk mengambil data gambar
+
+                        if (!empty($gambarData)) {
+                            $gambarBase64 = base64_encode($gambarData); // Konversi blob ke base64
+
+                            echo '<img src="data:image/jpeg;base64,' . $gambarBase64 . '"style="border-radius: 10px;" width="100%" height="150" alt="Gambar Kue" class="image-rounded">';
+                        } else {
+                            echo 'Tidak ada gambar';
+                        }
+                        ?>
+                        <p class="services__description">
+                        <div>
+                            <a href="#" class="button button-link"><?= format_rupiah($r['harga']) ?>/<?= $r['satuan'] ?></a>
+                            <!-- <a href="#" class="button button__header">  </a> -->
+                        </div>
                     </div>
-                </div>
-                
-            <?php } ?>
-<!-- 
+
+                <?php } ?>
+                <!-- 
                 <div class="services__data">
                     <h3 class="services__subtitle">Kue Dadar Gulung</h3>
                     <img class="svg__color services__img" src="images/kue gulung_prev_ui 1.png" alt="">
@@ -151,7 +170,7 @@ include 'page/koneksi.php';
                         </a>
                     </div>
                 </div>
-                <img class="svg__img svg__color app__img" src="assets/img/downloading.html" alt="">
+                <img class="svg__img svg__color app__img" src="images/download duluu.png" alt="">
 
             </div>
         </section>
@@ -162,17 +181,32 @@ include 'page/koneksi.php';
             <div class="contact container" id="contact">
                 <div class="contact__container grid">
                     <div class="contact__content">
-                        <h2 class="section__title-center">Hubungi Kami <br> Disini </h2>
+                        <h2 class="section__title-center">Hubungi Kami <br> </h2>
                         <p class="contact__description">Hubungi kami dan beri tahu kami bagaimana kami dapat membuat acara Anda lebih istimewa. Tim kami siap memberikan pelayanan terbaik dan membantu Anda merencanakan setiap detail. Jangan ragu untuk menghubungi kami!"</p>
                     </div>
 
                     <ul class="contact__content grid">
-                        <li class="contact__address">Telephone: <span class="contact__information">+6283 XXX XXX</span>
-                        </li>
-                        <li class="contact__address">Alamat : <span class="contact__information">Jawa Timur,
-                                Indonesia</span></li>
-                        <li class="contact__address">Email : <span
-                                class="contact__information">cantara@polije.go.id </span></li>
+                        <?php
+                        $sql    = "SELECT * FROM user WHERE status = 'admin'";
+                        $q      = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($q)) {
+                        ?>
+                            <li class="contact__address">Telepon:
+                                <span class="contact__information">
+                                    <?= $row['telp'] ?>
+                                </span>
+                            </li>
+                            <li class="contact__address">Kecamatan :
+                                <span class="contact__information">
+                                    <?= $row['kecamatan'] ?>
+                                </span>
+                            </li>
+                            <li class="contact__address">Alamat Lengkap :
+                                <span class="contact__information">
+                                    <?= $row['alamat_lengkap'] ?>
+                                </span>
+                            </li>
+                        <?php } ?>
                     </ul>
 
                     <div class="contact__content">

@@ -1,13 +1,13 @@
 <?php
 function generateRandomID()
 {
-    $letters = 'K'; 
+    $letters = 'K';
 
-    $date = date('Ymd'); 
+    $date = date('Ymd');
 
     $randomNumber = sprintf('%04d', mt_rand(0, 9999)); // Angka acak empat digit
 
-    $randomID = $letters . $date . $randomNumber; 
+    $randomID = $letters . $date . $randomNumber;
 
     return $randomID;
 }
@@ -29,7 +29,7 @@ $id = generateRandomID();
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Tambah Data Kue Hajatan</h4>
+                    <h4 class="header-title">Tambah Data Kue Kering</h4>
                     <p class="text-muted font-14"></p>
 
                     <ul class="nav nav-tabs nav-bordered mb-3">
@@ -87,24 +87,39 @@ $id = generateRandomID();
                                     </div>
                                 </div>
                                 <?php
-                                if (@$_POST['simpan']) {
-                                    $nama        = $_POST['txtnama'];
-                                    $harga       = $_POST['txtharga'];
-                                    $kategori    = $_POST['txtkategori'];
-                                    $gambar      = $_FILES['txtgbr']['name'];
-                                    $tmp         = $_FILES['txtgbr']['tmp_name'];
-                                    $jumlah      = $_POST['txtjumlah'];
-                                    $satuan      = $_POST['txtsatuan'];
-                                    $id          = generateRandomID();
+                                function getTodayDate()
+                                {
+                                    date_default_timezone_set('Asia/Jakarta');
+                                    return date("Y-m-d H:i:s"); // Format: tahun-bulan-hari jam:menit:detik
+                                }
 
-                                    if (empty($gambar)) {
-                                        mysqli_query($conn, "INSERT INTO kue (id_kue,nama_kue,harga,kategori,jumlah,satuan)VALUES
-                                    ('$id', '$nama', '$harga', '$kategori', '$jumlah', '$satuan') ");
-                                    }else{
-                                         mysqli_query($conn, "INSERT INTO kue (id_kue,nama_kue,harga,kategori,gambar,jumlah,satuan)VALUES
-                                                ('$id', '$nama', '$harga', '$kategori', '$gambar', '$jumlah', '$satuan') ");
-                                    copy($tmp, "img/$gambar");
-                                    }
+                                if (isset($_POST['simpan'])) {
+                                    $nama     = $_POST['txtnama'];
+                                    $harga    = $_POST['txtharga'];
+                                    $kategori = $_POST['txtkategori'];
+                                    $gambar   = $_FILES['txtgbr']['name'];
+                                    $tmp      = $_FILES['txtgbr']['tmp_name'];
+                                    $jumlah   = $_POST['txtjumlah'];
+                                    $satuan   = $_POST['txtsatuan'];
+                                    $tgl      = getTodayDate(); // Menggunakan fungsi untuk mendapatkan tanggal hari ini
+                                    $id       = generateRandomID();
+
+                                    // Baca isi file gambar
+                                    $gambarData = file_get_contents($tmp);
+
+                                    // Persiapkan pernyataan SQL dengan parameter tanda tanya (?)
+                                    $stmt = mysqli_prepare($conn, "INSERT INTO kue (id_kue, nama_kue, harga, kategori, gambar, jumlah, satuan, waktu_unggah) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+                                    // Bind parameter tanda tanya dengan data
+                                    mysqli_stmt_bind_param($stmt, "ssdsssss", $id, $nama, $harga, $kategori, $gambarData, $jumlah, $satuan, $tgl);
+
+                                    // Eksekusi pernyataan SQL
+                                    mysqli_stmt_execute($stmt);
+
+                                    // Tutup pernyataan dan koneksi
+                                    mysqli_stmt_close($stmt);
+                                    mysqli_close($conn);
+
                                     echo "<script>alert('Data berhasil disimpan');location='.?hal=kuehajatan'</script>";
                                 }
                                 ?>

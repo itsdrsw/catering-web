@@ -17,24 +17,80 @@ $row      = mysqli_fetch_assoc($result);
     <div class="row justify-content-center">
         <div class="col-lg-7 col-md-10 col-sm-11">
 
-            <div class="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
-                <div class="horizontal-steps-content">
-                    <div class="step-item current">
-                        <span title="20/08/2018 07:24 PM">Disetujui</span>
+            <?php if ($row['ket'] == 'Disetujui') : ?>
+                <div class="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
+                    <div class="horizontal-steps-content">
+                        <div class="step-item current">
+                            <span title="">Disetujui</span>
+                        </div>
+                        <div class="step-item">
+                            <span>Diproses</span>
+                        </div>
+                        <div class="step-item">
+                            <span>Dikirim</span>
+                        </div>
+                        <div class="step-item">
+                            <span>Selesai</span>
+                        </div>
                     </div>
-                    <div class="step-item">
-                        <span>Diproses</span>
-                    </div>
-                    <div class="step-item">
-                        <span>Dikirim</span>
-                    </div>
-                    <div class="step-item">
-                        <span>Selesai</span>
-                    </div>
+                    <div class="process-line" style="width: 0%;"></div>
                 </div>
+            <?php elseif ($row['ket'] == 'Dibuat') : ?>
+                <div class="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
+                    <div class="horizontal-steps-content">
+                        <div class="step-item">
+                            <span title="">Disetujui</span>
+                        </div>
+                        <div class="step-item current">
+                            <span>Diproses</span>
+                        </div>
+                        <div class="step-item">
+                            <span>Dikirim</span>
+                        </div>
+                        <div class="step-item">
+                            <span>Selesai</span>
+                        </div>
+                    </div>
+                    <div class="process-line" style="width: 33%;"></div>
+                </div>
+            <?php elseif ($row['ket'] == 'Dikirim') : ?>
+                <div class="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
+                    <div class="horizontal-steps-content">
+                        <div class="step-item">
+                            <span title="">Disetujui</span>
+                        </div>
+                        <div class="step-item ">
+                            <span>Diproses</span>
+                        </div>
+                        <div class="step-item current">
+                            <span>Dikirim</span>
+                        </div>
+                        <div class="step-item">
+                            <span>Selesai</span>
+                        </div>
+                    </div>
+                    <div class="process-line" style="width: 66%;"></div>
+                </div>
+            <?php elseif ($row['ket'] == 'Selesai') : ?>
+                <div class="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
+                    <div class="horizontal-steps-content">
+                        <div class="step-item">
+                            <span title="">Disetujui</span>
+                        </div>
+                        <div class="step-item ">
+                            <span>Diproses</span>
+                        </div>
+                        <div class="step-item">
+                            <span>Dikirim</span>
+                        </div>
+                        <div class="step-item current">
+                            <span>Selesai</span>
+                        </div>
+                    </div>
+                    <div class="process-line" style="width: 100%;"></div>
+                </div>
+            <?php endif; ?>
 
-                <div class="process-line" style="width: 0%;"></div>
-            </div>
         </div>
     </div>
     <!-- end row -->
@@ -90,22 +146,15 @@ $row      = mysqli_fetch_assoc($result);
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Grand Total :</td>
-                                    <td>$1641</td>
-                                </tr>
-                                <tr>
-                                    <td>Shipping Charge :</td>
-                                    <td>$23</td>
-                                </tr>
-                                <tr>
-                                    <td>Estimated Tax : </td>
-                                    <td>$19.22</td>
-                                </tr>
-                                <tr>
-                                    <th>Total :</th>
-                                    <th>$1683.22</th>
-                                </tr>
+                                <?php
+                                $res = mysqli_query($conn, $query);
+                                while ($p = mysqli_fetch_assoc($res)) {
+                                ?>
+                                    <tr>
+                                        <td>Grand Total :</td>
+                                        <td><?= $p['total_harga'] ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -128,9 +177,9 @@ $row      = mysqli_fetch_assoc($result);
 
                     <address class="mb-0 font-14 address-lg">
                         <?= $row['alamat_lengkap'] ?><br>
-                        <?= $row['kecamatan'] ?><br>
+                        Kecamatan <?= $row['kecamatan'] ?> <br>
                         <p class="mb-0"><b>Telepon :</b> <?= $row['telp'] ?></p>
-                        <p class="mb-0"><b>Telepon :</b> xxxxxx090</p>
+                        <p class="mb-0"><b>Pesan :</b> <?= $row['pesan'] ?></p>
                     </address>
 
                 </div>
@@ -151,4 +200,30 @@ $row      = mysqli_fetch_assoc($result);
             </div>
         </div> <!-- end col -->
     </div>
+    <div class="row">
+        <!-- <div class="row"> -->
+        <div class="col-sm-6 col-lg-6">
+            <!-- Simple card -->
+            <!-- <div class="card d-block"> -->
+            <?php
+            /**   $gambarData = $row['bukti']; // Ambil data gambar dari database
+                    if (!empty($gambarData)) {
+                        $gambarBase64 = base64_encode($gambarData); // Konversi blob ke base64
+
+                        echo '<img src="data:image/jpeg;base64,' . $gambarBase64 . '" width="100%" height="auto">';
+                    } else {
+                        echo 'Tidak ada gambar';
+                    }
+             */
+            ?>
+            <!-- <img class="card-img-top" src="assets/images/small/small-1.jpg" alt="Card image cap"> -->
+            <!-- <div class="card-body"> -->
+            <!-- <h5 class="card-title text-center">Bukti Pesanan</h5> -->
+            <!-- <p class="card-text"></p> -->
+            <!-- <a href="javascript: void(0);" class="btn btn-primary"></a> -->
+        </div> <!-- end card-body-->
+    </div> <!-- end card-->
+</div><!-- end col -->
+</div>
+</div>
 </div>

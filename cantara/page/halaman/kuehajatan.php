@@ -40,7 +40,17 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama_kue'] ?></td>
                                         <td>
-                                            <img src="img/<?= $row['gambar'] ?>" width="60" height="40">
+                                            <?php
+                                            $gambarData = $row['gambar']; // Ambil data gambar dari database
+
+                                            if (!empty($gambarData)) {
+                                                $gambarBase64 = base64_encode($gambarData); // Konversi blob ke base64
+
+                                                echo '<img src="data:image/jpeg;base64,' . $gambarBase64 . '" width="60" height="40">';
+                                            } else {
+                                                echo 'Tidak ada gambar';
+                                            }
+                                            ?>
                                         </td>
                                         <td><?= $row['harga'] ?></td>
                                         <td><?= $row['jumlah'] ?> <?= $row['satuan'] ?></td>
@@ -51,16 +61,26 @@
                                             <a class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus ?')" href=".?hal=hapuskuehajatan&id=<?= $row['id_kue'] ?>">
                                                 <i class="ri-delete-bin-2-fill"></i> Hapus</a>
 
-                                            <button type="button" class="btn btn-success ri-picture-in-picture-exit-line" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>">Lihat Foto</button>
+                                            <button type="button" class="btn btn-success ri-picture-in-picture-exit-line" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"> Lihat Foto</button>
                                             <div id="<?= $modalId ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="<?= $modalId ?>" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-success">
-                                                            <h4 class="modal-title" style="color: #fff;" id="<?= $modalId ?> label">Foto Kue <?= $row['nama_kue'] ?></h4>
+                                                            <h4 class="modal-title" style="color: white;" id="<?= $modalId ?> label">Foto Kue <?= $row['nama_kue'] ?></h4>
                                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <img src="img/<?= $row['gambar'] ?>" style="max-width: 100%;" height="auto">
+                                                            <?php
+                                                            $gambarData = $row['gambar']; // Ambil data gambar dari database
+
+                                                            if (!empty($gambarData)) {
+                                                                $gambarBase64 = base64_encode($gambarData); // Konversi blob ke base64
+
+                                                                echo '<img src="data:image/jpeg;base64,' . $gambarBase64 . '" width="100%" height="auto">';
+                                                            } else {
+                                                                echo 'Tidak ada gambar';
+                                                            }
+                                                            ?>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -73,9 +93,9 @@
                                 <?php   } ?>
                             </tbody>
                         </table>
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div> 
+</div>

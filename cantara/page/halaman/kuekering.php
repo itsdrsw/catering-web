@@ -31,16 +31,26 @@
                             <tbody>
                                 <?php
                                 $no = 1;
-                               $query = "SELECT * FROM kue where kategori = 'kering'";
+                                $query = "SELECT * FROM kue where kategori = 'kering'";
                                 $result = mysqli_query($conn, $query);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $modalId = "modal-" . $row['id_kue'];
-                                ?> 
+                                ?>
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $row['nama_kue'] ?></td>
                                         <td>
-                                            <img src="img/<?= $row['gambar'] ?>" width="60" height="40">
+                                            <?php
+                                            $gambarData = $row['gambar']; // Ambil data gambar dari database
+
+                                            if (!empty($gambarData)) {
+                                                $gambarBase64 = base64_encode($gambarData); // Konversi blob ke base64
+
+                                                echo '<img src="data:image/jpeg;base64,' . $gambarBase64 . '" width="60" height="40">';
+                                            } else {
+                                                echo 'Tidak ada gambar';
+                                            }
+                                            ?>
                                         </td>
                                         <td><?= $row['harga'] ?></td>
                                         <td><?= $row['jumlah'] ?> <?= $row['satuan'] ?></td>
@@ -60,7 +70,17 @@
                                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <img src="img/<?= $row['gambar'] ?>" style="max-width: 100%;" height="auto">
+                                                            <?php
+                                                            $gambarData = $row['gambar']; // Ambil data gambar dari database
+
+                                                            if (!empty($gambarData)) {
+                                                                $gambarBase64 = base64_encode($gambarData); // Konversi blob ke base64
+
+                                                                echo '<img src="data:image/jpeg;base64,' . $gambarBase64 . '" width="100%" height="auto">';
+                                                            } else {
+                                                                echo 'Tidak ada gambar';
+                                                            }
+                                                            ?>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -73,9 +93,9 @@
                                 <?php   } ?>
                             </tbody>
                         </table>
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div> 
+</div>

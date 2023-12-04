@@ -30,7 +30,7 @@
                             <tbody>
                                 <?php
                                 $no = 1;
-                                $query = "SELECT * FROM pesanan p inner join user u on p.id_user = u.id_user where p.ket = 'request' OR p.ket = 'rejected'";
+                                $query = "SELECT * FROM pesanan p inner join user u on p.id_user = u.id_user where p.ket = 'Diminta'";
                                 $result = mysqli_query($conn, $query);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
@@ -40,18 +40,18 @@
                                         <td><?= $row['total_harga'] ?></td>
                                         <td><?= $row['tgl_terima'] ?></td>
                                         <td>
-                                            <?php if ($row['ket'] == 'request') : ?>
-                                                <button class="btn btn-soft-info rounded-pill"><?= $row['ket'] ?></button>
-                                            <?php elseif ($row['ket'] == 'rejected') : ?>
-                                                <button class="btn btn-soft-danger rounded-pill"><?= $row['ket'] ?></button>
+                                            <?php if ($row['ket'] == 'Diminta') : ?>
+                                                <h4><a href="#" class="badge badge-secondary-lighten"><?= $row['ket'] ?></a></h4>
+                                            <?php elseif ($row['ket'] == 'Ditolak') : ?>
+                                                <h4><a href="#" class="badge badge-danger-lighten"><?= $row['ket'] ?></a></h4>
                                             <?php endif; ?>
                                         </td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href=".?hal=ubahpermintaan&id=<?= $row['id_pesanan'] ?>">
                                                 <i class=" ri-edit-2-fill"></i> Ubah</a>
 
-                                            <a class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus ?')" href=".?hal=hapususer&id=<?= $row['id_user'] ?>">
-                                                <i class="ri-delete-bin-2-fill"></i> Hapus</a>
+                                            <!-- <a class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus ?')" href=".?hal=hapususer&id=<?= $row['id_user'] ?>">
+                                                <i class="ri-delete-bin-2-fill"></i> Hapus</a> -->
 
                                             <a class="btn btn-success btn-sm" href=".?hal=detailpesanan&id=<?= $row['id_pesanan'] ?>">
                                                 <i class=" ri-edit-2-fill"></i> Selengkapnya</a>

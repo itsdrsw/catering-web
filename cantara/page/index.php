@@ -133,11 +133,6 @@ if (empty($_SESSION['id_user'])) {
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <i class="ri-account-pin-circle-fill"></i>
-                                    <span> Akun saya</span>
-                                </a>
-                                <!-- item-->
                                 <a href=".?hal=close" class="dropdown-item">
                                     <i class="ri-logout-circle-line"></i>
                                     <span> Keluar</span>
@@ -234,28 +229,11 @@ if (empty($_SESSION['id_user'])) {
                                 <span> Permintaan </span>
                             </a>
                         </li>
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarPesanan" aria-expanded="true" aria-controls="sidebarDashboards" class="side-nav-link">
-                                <i class=" ri-shopping-bag-fill"></i>
-                                <span> Daftar Pesanan </span>
-                                <span class="menu-arrow"></span>
+                        <li class="side-nav-item" aria-expanded="false">
+                            <a href=".?hal=pesanan-approve" class="side-nav-link">
+                                <i class="ri-shopping-bag-fill"></i>
+                                <span> Pesanan </span>
                             </a>
-                            <div class="collapse" id="sidebarPesanan">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a href=".?hal=pesanan-approve">Pesanan Approve</a>
-                                    </li>
-                                    <li>
-                                        <a href=".?hal=pesanan-proccess">Pesanan Proccess</a>
-                                    </li>
-                                    <li>
-                                        <a href=".?hal=pesanan-delivery">Pesanan Delivery</a>
-                                    </li>
-                                    <li>
-                                        <a href=".?hal=pesanan-complete">Pesanan Complete</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                         <!-- <li class="side-nav-item" aria-expanded="false">
                             <a href=".?hal=pesanan" class="side-nav-link">
@@ -299,13 +277,13 @@ if (empty($_SESSION['id_user'])) {
                                     document.write(new Date().getFullYear())
                                 </script> © Allright. reserved
                             </div>
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div class="text-md-end footer-links d-none d-md-block">
                                     <a href="javascript: void(0);">About</a>
                                     <a href="javascript: void(0);">Support</a>
                                     <a href="javascript: void(0);">Contact Us</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </footer>
