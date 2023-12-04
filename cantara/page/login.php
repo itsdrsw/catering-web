@@ -21,7 +21,13 @@ if (empty($_SESSION['user'])) {
             $_SESSION['telp'] = $row['telp'];
             $_SESSION['security'] = $row['security'];
             $_SESSION['status'] = $row['status'];
-            echo "<script>location='.'</script>";
+            
+            // Jika user merupakan admin maka bisa masuk ke laman admin, jika tidak maka tidak bisa masuk ke laman admin
+            if ($_SESSION['status'] == 'admin') {
+                echo "<script>location='index.php'</script>";
+            } else {
+                echo "<script>alert('Anda tidak bisa login');location='login.php'</script>";
+            }
         } else {
             echo "<script>alert('Data yang dimasukkan salah');location='login.php'</script>";
         }

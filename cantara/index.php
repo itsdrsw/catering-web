@@ -51,7 +51,7 @@ include 'config/koneksi.php';
                 <i class='bx bx-grid-alt'></i>
             </div>
 
-            <a href="#" class="button button__header">Login</a>
+            <a href="page/login.php" class="button button__header">Login</a>
         </nav>
     </header>
 
@@ -68,7 +68,7 @@ include 'config/koneksi.php';
                         sentuhan manis dan tak
                         terlupakan ke setiap momen spesial Anda.</p>
 
-                    <a href="#" class="button">Login</a>
+                    <a href="page/login.php" class="button">Login</a>
 
                 </div>
             </div>
